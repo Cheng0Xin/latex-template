@@ -1,12 +1,9 @@
-% This document class provides a simple memo for LaTeX users.
-% It is based on article.cls and inherits most of the functionality
-% that class.
-% 
-% Author: Rob Oakes, Copyright 2010.  Released under the LGPL, version 3.
+% Part of code is from: Rob Oakes
+% Author: Claude Xin, Copyright 2022.  Released under the LGPL, version 3.
 % A copy of the LGPL can be found at http://www.gnu.org/licenses/lgpl.html
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{texMemo}[2010/07/31 - Simple Memo Class, Including Logo]
+\ProvidesClass{texMemo}[2022/05/05 - research notes/memos template]
 \RequirePackage{palatino}
 
 \usepackage{graphicx}
@@ -39,7 +36,6 @@
 \RequirePackage[colorlinks=true,linkcolor=blue,urlcolor=black,bookmarksopen=true]{hyperref}
 \usetikzlibrary{arrows, backgrounds, positioning, calc, automata, matrix, shapes.geometric, shapes.misc}
 
-% Specialized memo Commands (To, From, Subject, Logo, Letterhead Address)
 
 \def\@btitle{\relax}
 \newcommand{\btitle}[1]{\gdef\@btitle{\textsc{#1}}}
