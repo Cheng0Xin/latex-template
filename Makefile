@@ -6,3 +6,5 @@ buildcode:
 
 clean:
 	latexmk -C
+	rm *.bbl
+	rm *.run.xml

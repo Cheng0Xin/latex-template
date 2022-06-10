@@ -36,6 +36,11 @@
 \RequirePackage[colorlinks=true,linkcolor=blue,urlcolor=black,bookmarksopen=true]{hyperref}
 \usetikzlibrary{arrows, backgrounds, positioning, calc, automata, matrix, shapes.geometric, shapes.misc}
 
+\RequirePackage{skak}
+\RequirePackage{scalerel}
+
+\RequirePackage[backend=biber]{biblatex}
+\ExecuteBibliographyOptions{url=false, maxnames=99}
 
 \def\@btitle{\relax}
 \newcommand{\btitle}[1]{\gdef\@btitle{\textsc{#1}}}
@@ -174,10 +179,25 @@
 }
 \lstnewenvironment{haskell} {\lstset{language=haskell}}{}
 
+% Python
+\lstdefinelanguage{python} {
+  morekeywords={
+    for, in, while, True, False, class, with, and, or, not, if, else
+  },
+  sensitive=true,
+  morecomment=[l]{\#},
+  morecomment=[s]{"""}{"""},
+  morestring=[b]",
+  style=common
+}
+\lstnewenvironment{python} {\lstset{language=python}}{}
+
 % Style
+
+
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
-\newcommand{\highlight}[1]{{\color{teal}#1}}
-\newcommand{\hl}[1]{\highlight{#1}}
+\renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
+\newcommand{\hl}[1]{{\color{teal}#1}}
 \newcommand{\No}[1]{{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
 \newcommand{\sref}[1]{\textit{$\langle\dag$ #1 $\rangle$}}
@@ -191,6 +211,6 @@
 \newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
 
-\surroundwithmdframed[backgroundcolor=red!20]{definition}
-\surroundwithmdframed[backgroundcolor=blue!20]{theorem}
-\surroundwithmdframed[backgroundcolor=yellow!20]{proposition}
+\surroundwithmdframed[backgroundcolor=red!20, skipabove=10pt, linewidth=1.5pt]{definition}
+\surroundwithmdframed[backgroundcolor=blue!20, skipabove=10pt, linewidth=1.5pt]{theorem}
+\surroundwithmdframed[backgroundcolor=yellow!20, skipabove=10pt, linewidth=1.5pt]{proposition}
