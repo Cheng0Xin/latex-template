@@ -33,6 +33,7 @@
 \RequirePackage{pgfgantt}
 \RequirePackage{tikz}
 \RequirePackage{upgreek}
+\RequirePackage{ifplatform} % detect the platform of the os, support commands i.e., iflinux, ifmacosx. '--shell-escape' is required when build
 \RequirePackage[colorlinks=true,linkcolor=blue,urlcolor=black,bookmarksopen=true]{hyperref}
 \usetikzlibrary{arrows, backgrounds, positioning, calc, automata, matrix, shapes.geometric, shapes.misc}
 
@@ -216,7 +217,9 @@
 \newcommand{\No}[1]{{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
 \newcommand{\sref}[1]{\textit{$\langle\dag$ #1 $\rangle$}}
-\setCJKmainfont{Heiti SC}
+
+\iflinux\setCJKmainfont{Noto Sans Mono CJK SC}\fi
+\ifmacosx\setCJKmainfont{Heiti SC}\fi
 
 % Theorem & Definition
 \RequirePackage{mdframed}

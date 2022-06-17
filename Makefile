@@ -1,5 +1,5 @@
 build:
-	latexmk
+	latexmk --shell-escape
 
 buildcode:
 	make -f code/Makefile

@@ -1,3 +1,4 @@
 .auctex-auto/*
 base/.DS_Store
 base/.auctex-auto/*
+.vscode/*
