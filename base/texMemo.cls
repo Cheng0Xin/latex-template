@@ -37,8 +37,8 @@
 \RequirePackage[colorlinks=true,linkcolor=blue,urlcolor=black,bookmarksopen=true]{hyperref}
 \usetikzlibrary{arrows, backgrounds, positioning, calc, automata, matrix, shapes.geometric, shapes.misc}
 
-\RequirePackage{skak}
-\RequirePackage{scalerel}
+\RequirePackage{skak} % Unicode symbol
+\RequirePackage{scalerel} % Scale unicode symbol
 
 \RequirePackage[backend=biber]{biblatex}
 \ExecuteBibliographyOptions{url=false, maxnames=99}
@@ -222,7 +222,7 @@
 \ifmacosx\setCJKmainfont{Heiti SC}\fi
 
 % Theorem & Definition
-\RequirePackage{mdframed}
+\RequirePackage[framemethod=TiKz]{mdframed}
 \theoremstyle{definition}
 
 \newtheorem{theorem}{Theorem}
@@ -232,3 +232,7 @@
 \surroundwithmdframed[backgroundcolor=red!20, skipabove=10pt, linewidth=1.5pt]{definition}
 \surroundwithmdframed[backgroundcolor=blue!20, skipabove=10pt, linewidth=1.5pt]{theorem}
 \surroundwithmdframed[backgroundcolor=yellow!20, skipabove=10pt, linewidth=1.5pt]{proposition}
+
+% Note 
+\newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
+\newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Note:}}{\end{mdnote}}
