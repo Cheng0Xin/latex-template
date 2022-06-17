@@ -221,6 +221,7 @@
 
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
+\newcommand{\remph}[1]{\emph{#1}\sidenote{\textbf{Idx: {\color{magenta}#1}}}}
 \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
 \newcommand{\hl}[1]{{\color{teal}#1}}
 \newcommand{\No}[1]{\newline{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
