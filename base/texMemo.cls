@@ -223,7 +223,7 @@
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
 \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
 \newcommand{\hl}[1]{{\color{teal}#1}}
-\newcommand{\No}[1]{{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
+\newcommand{\No}[1]{\newline{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
 \newcommand{\sref}[1]{\textit{$\langle\dag$ #1 $\rangle$}}
 
