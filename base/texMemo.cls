@@ -9,7 +9,10 @@
 \usepackage{graphicx}
 
 % Load the Base Class
-\LoadClassWithOptions{article}
+\PassOptionsToClass{\CurrentOption}{article}
+\LoadClass[twoside]{article}
+
+
 
 % Begin Requirements
 \RequirePackage{amsmath}
@@ -21,7 +24,6 @@
 \RequirePackage{color}
 \RequirePackage{dsfont}
 \RequirePackage{graphicx}
-\RequirePackage{geometry}
 \RequirePackage{float}
 \RequirePackage{ifthen}
 \RequirePackage{syntax}
@@ -71,8 +73,15 @@
 }
 
 % Set the Paper Size and margins
-\RequirePackage{geometry}
-\geometry{margin=1.0in}
+\usepackage[a4paper,
+  inner=20mm,
+  outer=50mm,% = marginparsep + marginparwidth 
+  top=20mm,
+  bottom=25mm,
+  marginparsep=5mm,
+  marginparwidth=40mm]{geometry} % Page
+\newcommand{\sidenote}[1]{\marginpar{$\ddagger$ #1}}
+
 
 % Create the Letterhead and To/From Block
 
@@ -235,4 +244,4 @@
 
 % Note 
 \newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
-\newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Note:}}{\end{mdnote}}
+\newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Conclusion:}}{\end{mdnote}}
