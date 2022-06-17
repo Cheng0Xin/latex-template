@@ -75,12 +75,12 @@
 % Set the Paper Size and margins
 \usepackage[a4paper,
   inner=20mm,
-  outer=50mm,% = marginparsep + marginparwidth 
+  outer=60mm,% = marginparsep + marginparwidth
   top=20mm,
   bottom=25mm,
-  marginparsep=5mm,
+  marginparsep=15mm,
   marginparwidth=40mm]{geometry} % Page
-\newcommand{\sidenote}[1]{\marginpar{$\ddagger$ #1}}
+\newcommand{\sidenote}[1]{\marginpar{{\color{black} $\ddagger$} #1}}
 
 
 % Create the Letterhead and To/From Block
@@ -221,7 +221,7 @@
 
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
-\newcommand{\remph}[1]{\emph{#1}\sidenote{\textbf{Idx: {\color{magenta}#1}}}}
+\newcommand{\remph}[1]{\emph{#1}\sidenote{\textbf{{\color{black} Idx: }{\color{magenta}#1}}}}
 \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
 \newcommand{\hl}[1]{{\color{teal}#1}}
 \newcommand{\No}[1]{\newline{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
