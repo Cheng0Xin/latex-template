@@ -221,10 +221,11 @@
 
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
-\newcommand{\remph}[1]{\emph{#1}\sidenote{\textbf{{\color{black} Idx: }{\color{magenta}#1}}}}
+\newcommand{\idxsidenote}[1]{\sidenote{\textbf{{\color{black} Idx: }{\color{gray}#1}}}}
+\newcommand{\remph}[1]{\emph{#1}\idxsidenote{#1}}
 \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
 \newcommand{\hl}[1]{{\color{teal}#1}}
-\newcommand{\No}[1]{\newline{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
+\newcommand{\No}[1]{\hfill\break{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
 \newcommand{\sref}[1]{\textit{$\langle\dag$ #1 $\rangle$}}
 
@@ -239,9 +240,9 @@
 \newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
 
-\surroundwithmdframed[backgroundcolor=red!20, skipabove=10pt, linewidth=1.5pt]{definition}
-\surroundwithmdframed[backgroundcolor=blue!20, skipabove=10pt, linewidth=1.5pt]{theorem}
-\surroundwithmdframed[backgroundcolor=yellow!20, skipabove=10pt, linewidth=1.5pt]{proposition}
+\surroundwithmdframed[backgroundcolor=red!20, skipabove=1em, linewidth=1.5pt]{definition}
+\surroundwithmdframed[backgroundcolor=blue!20, skipabove=1em, linewidth=1.5pt]{theorem}
+\surroundwithmdframed[backgroundcolor=yellow!20, skipabove=1em, linewidth=1.5pt]{proposition}
 
 % Note 
 \newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
