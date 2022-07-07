@@ -39,6 +39,8 @@
 \RequirePackage[colorlinks=true,linkcolor=blue,urlcolor=black,bookmarksopen=true]{hyperref}
 \usetikzlibrary{arrows, backgrounds, positioning, calc, automata, matrix, shapes.geometric, shapes.misc}
 
+\RequirePackage{semantic} % Support for semantic definition
+
 \RequirePackage{skak} % Unicode symbol
 \RequirePackage{scalerel} % Scale unicode symbol
 
@@ -219,6 +221,30 @@
 }
 \lstnewenvironment{rust} {\lstset{language=rust}}{}
 
+% Fsharp
+\lstdefinelanguage{fsharp}{
+  morekeywords={
+    abstract, and, as, assert, base, begin, class,
+    default, delegate, do, done, downcast, downto, elif, else, end,
+    exception, extern, false, finally, fixed, for, fun, function, global, if,
+    in, inherit, inline, interface, internal, lazy, let, let!, match, match!, member,
+    module, mutable, namespace, new, not, null, of, open, or, override, private, public,
+    rec, return, return!, select, static, struct, then, to, true, try, type, upcast, use,
+    use!, val, void, when, while, with, yield, yield!, const,
+    % Ocaml extension
+    asr, land, lor, lsl, lsr, lxor, mod, sig,
+    % Future expansion
+    break, checked, component, const, constraint, continue, event, external, include, mixin, parallel,
+    process, protected, pure, sealed, tailcall, trait, virtual
+  },
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{(*}{*)},
+  morestring=[b]",
+  style=common
+}
+\lstnewenvironment{fsharp} {\lstset{language=fsharp}}{}
+
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
 \newcommand{\idxsidenote}[1]{\sidenote{\textbf{{\color{black} Idx: }{\color{gray}#1}}}}
@@ -239,10 +265,12 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
 
 \surroundwithmdframed[backgroundcolor=red!20, skipabove=1em, linewidth=1.5pt]{definition}
 \surroundwithmdframed[backgroundcolor=blue!20, skipabove=1em, linewidth=1.5pt]{theorem}
 \surroundwithmdframed[backgroundcolor=yellow!20, skipabove=1em, linewidth=1.5pt]{proposition}
+\surroundwithmdframed[backgroundcolor=green!20, skipabove=1em, linewidth=1.5pt]{lemma}
 
 % Note 
 \newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
