@@ -82,7 +82,7 @@
   bottom=25mm,
   marginparsep=15mm,
   marginparwidth=40mm]{geometry} % Page
-\newcommand{\sidenote}[1]{\marginpar{{\color{black} $\ddagger$} #1}}
+\newcommand{\sidenote}[1]{\marginpar{{\color{black} $\blacktriangleright$} \small{#1}}}
 
 
 % Create the Letterhead and To/From Block
@@ -247,7 +247,7 @@
 
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
-\newcommand{\idxsidenote}[1]{\sidenote{\textbf{{\color{black} Idx: }{\color{gray}#1}}}}
+\newcommand{\idxsidenote}[1]{\sidenote{\normalsize{\textbf{{\color{black} Idx: }}}{\color{gray}#1}}}
 \newcommand{\remph}[1]{\emph{#1}\idxsidenote{#1}}
 \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
 \newcommand{\hl}[1]{{\color{teal}#1}}
