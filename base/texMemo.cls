@@ -43,6 +43,10 @@
 
 \RequirePackage{skak} % Unicode symbol
 \RequirePackage{scalerel} % Scale unicode symbol
+\RequirePackage{pifont} % Crossmark and checkmark
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
 
 \RequirePackage[backend=biber]{biblatex}
 \ExecuteBibliographyOptions{url=false, maxnames=99}
@@ -82,7 +86,11 @@
   bottom=25mm,
   marginparsep=15mm,
   marginparwidth=40mm]{geometry} % Page
-\newcommand{\sidenote}[1]{\marginpar{{\color{black} $\blacktriangleright$} \small{#1}}}
+\newcommand{\sidenotectx}[2]{\marginpar{{\color{black} #2} \small{#1}}}
+\newcommand{\sidenote}[1]{\sidenotectx{#1}{$\blacksquare$}}
+\newcommand{\idxsidenote}[1]{\sidenotectx{\small{{\color{gray} #1}}}{$\hookrightarrow$}}
+  
+% \sidenote{\normalsize{\textbf{{\color{black} $\hookrightarrow$ }}}{\color{gray}#1}}}
 
 
 % Create the Letterhead and To/From Block
@@ -247,9 +255,9 @@
 
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
-\newcommand{\idxsidenote}[1]{\sidenote{\normalsize{\textbf{{\color{black} Idx: }}}{\color{gray}#1}}}
 \newcommand{\remph}[1]{\emph{#1}\idxsidenote{#1}}
-\renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
+% \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
+\renewcommand{\paragraph}[1]{$\blacksquare$ \textbf{#1}}
 \newcommand{\hl}[1]{{\color{teal}#1}}
 \newcommand{\No}[1]{\hfill\break{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
