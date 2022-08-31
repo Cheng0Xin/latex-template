@@ -32,6 +32,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{xeCJK}
 \RequirePackage{parskip}
+\RequirePackage{enumitem}
 \RequirePackage{pgfgantt}
 \RequirePackage{tikz}
 \RequirePackage{upgreek}

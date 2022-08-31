@@ -1,10 +1,8 @@
+FILENAME=template
 build:
-	latexmk --shell-escape
-
-buildcode:
-	make -f code/Makefile
+	latexmk -jobname='${FILENAME}' --shell-escape -quiet
 
 clean:
-	latexmk -C
+	latexmk -C -jobname='${FILENAME}'
 	rm *.bbl
 	rm *.run.xml
