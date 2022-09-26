@@ -26,7 +26,6 @@
 \RequirePackage{graphicx}
 \RequirePackage{float}
 \RequirePackage{ifthen}
-\RequirePackage{syntax}
 \RequirePackage{subfig}
 \RequirePackage{listings}
 \RequirePackage{xcolor}
@@ -41,6 +40,7 @@
 \usetikzlibrary{arrows, backgrounds, positioning, calc, automata, matrix, shapes.geometric, shapes.misc}
 
 \RequirePackage{semantic} % Support for semantic definition
+\RequirePackage[center]{formal-grammar} % For BNF
 
 \RequirePackage{skak} % Unicode symbol
 \RequirePackage{scalerel} % Scale unicode symbol
@@ -275,12 +275,53 @@
 \newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{convention}{Convention}
 
 \surroundwithmdframed[backgroundcolor=red!20, skipabove=1em, linewidth=1.5pt]{definition}
 \surroundwithmdframed[backgroundcolor=blue!20, skipabove=1em, linewidth=1.5pt]{theorem}
 \surroundwithmdframed[backgroundcolor=yellow!20, skipabove=1em, linewidth=1.5pt]{proposition}
 \surroundwithmdframed[backgroundcolor=green!20, skipabove=1em, linewidth=1.5pt]{lemma}
+\surroundwithmdframed[backgroundcolor=magenta!20, skipabove=1em, linewidth=1.5pt]{notation}
+\surroundwithmdframed[backgroundcolor=cyan!20, skipabove=1em, linewidth=1.5pt]{convention}
 
 % Note 
 \newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
 \newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Conclusion:}}{\end{mdnote}}
+
+% Unicode setting for Agda language
+\RequirePackage{unicode-math}
+\RequirePackage{newunicodechar}
+% Unicode
+\newunicodechar{ₐ}{\ensuremath{{}_{a}}}
+\newunicodechar{ₑ}{\ensuremath{{}_{e}}}
+\newunicodechar{ₕ}{\ensuremath{{}_{h}}}
+\newunicodechar{ᵢ}{\ensuremath{{}_{i}}}
+\newunicodechar{ⱼ}{\ensuremath{{}_{j}}}
+\newunicodechar{ₖ}{\ensuremath{{}_{k}}}
+\newunicodechar{ₗ}{\ensuremath{{}_{l}}}
+\newunicodechar{ₘ}{\ensuremath{{}_{m}}}
+\newunicodechar{ₙ}{\ensuremath{{}_{n}}}
+\newunicodechar{ₒ}{\ensuremath{{}_{o}}}
+\newunicodechar{ₚ}{\ensuremath{{}_{p}}}
+\newunicodechar{ᵣ}{\ensuremath{{}_{r}}}
+\newunicodechar{ₛ}{\ensuremath{{}_{s}}}
+\newunicodechar{ₜ}{\ensuremath{{}_{t}}}
+\newunicodechar{ᵤ}{\ensuremath{{}_{u}}}
+\newunicodechar{ᵥ}{\ensuremath{{}_{v}}}
+\newunicodechar{ₓ}{\ensuremath{{}_{x}}}
+
+\newunicodechar{₀}{\ensuremath{{}_{0}}}
+\newunicodechar{₁}{\ensuremath{{}_{1}}}
+\newunicodechar{₂}{\ensuremath{{}_{2}}}
+\newunicodechar{₃}{\ensuremath{{}_{3}}}
+\newunicodechar{₄}{\ensuremath{{}_{4}}}
+\newunicodechar{₅}{\ensuremath{{}_{5}}}
+\newunicodechar{₆}{\ensuremath{{}_{6}}}
+\newunicodechar{₇}{\ensuremath{{}_{7}}}
+\newunicodechar{₈}{\ensuremath{{}_{8}}}
+\newunicodechar{₉}{\ensuremath{{}_{9}}}
+
+\newunicodechar{₊}{\ensuremath{{}_{+}}}
+\newunicodechar{₋}{\ensuremath{{}_{-}}}
+\newunicodechar{₌}{\ensuremath{{}_{=}}}
