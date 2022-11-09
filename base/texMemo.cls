@@ -9,15 +9,15 @@
 \usepackage{graphicx}
 
 % Load the Base Class
-\PassOptionsToClass{\CurrentOption}{article}
-\LoadClass[twoside]{article}
-
-
+% \PassOptionsToClass{\CurrentOption}{article}
+% \LoadClass[twoside]{article}
+\LoadClassWithOptions{article}
 
 % Begin Requirements
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
 \RequirePackage{amssymb}
+\RequirePackage{mathtools}
 \RequirePackage{algorithm}
 \RequirePackage{algpseudocode}
 \RequirePackage{bussproofs}
@@ -80,16 +80,25 @@
 }
 
 % Set the Paper Size and margins
+\if@twoside%
+  \usepackage{marginfix}
+  \usepackage[a4paper,
+    inner=20mm,
+    outer=60mm,% = marginparsep + marginparwidth
+    top=20mm,
+    bottom=25mm,
+    marginparsep=15mm,
+    marginparwidth=40mm]{geometry} % Page
+  \newcommand{\sidenotectx}[2]{\marginpar{{\color{black} #2} \small{#1}}}
+  \newcommand{\sidenote}[1]{\sidenotectx{#1}{$\blacksquare$}}
+  \newcommand{\idxsidenote}[1]{\sidenotectx{\small{{\color{gray} #1}}}{$\hookrightarrow$}}
+\else%
 \usepackage[a4paper,
   inner=20mm,
-  outer=60mm,% = marginparsep + marginparwidth
+  outer=20mm,
   top=20mm,
-  bottom=25mm,
-  marginparsep=15mm,
-  marginparwidth=40mm]{geometry} % Page
-\newcommand{\sidenotectx}[2]{\marginpar{{\color{black} #2} \small{#1}}}
-\newcommand{\sidenote}[1]{\sidenotectx{#1}{$\blacksquare$}}
-\newcommand{\idxsidenote}[1]{\sidenotectx{\small{{\color{gray} #1}}}{$\hookrightarrow$}}
+  bottom=20mm]{geometry} % Page
+\fi%
   
 % \sidenote{\normalsize{\textbf{{\color{black} $\hookrightarrow$ }}}{\color{gray}#1}}}
 
@@ -259,7 +268,7 @@
 \newcommand{\remph}[1]{\emph{#1}\idxsidenote{#1}}
 % \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
 \renewcommand{\paragraph}[1]{$\blacksquare$ \textbf{#1}}
-\newcommand{\hl}[1]{{\color{teal}#1}}
+\newcommand{\hl}[1]{\textbf{\color{teal}#1}}
 \newcommand{\No}[1]{\hfill\break{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
 \newcommand{\sref}[1]{\textit{$\langle\dag$ #1 $\rangle$}}
@@ -271,6 +280,7 @@
 \RequirePackage[framemethod=TiKz]{mdframed}
 \theoremstyle{definition}
 
+\newtheorem{fact}{Fact}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
@@ -280,6 +290,7 @@
 
 \surroundwithmdframed[backgroundcolor=red!20, skipabove=1em, linewidth=1.5pt]{definition}
 \surroundwithmdframed[backgroundcolor=blue!20, skipabove=1em, linewidth=1.5pt]{theorem}
+\surroundwithmdframed[backgroundcolor=blue!20, skipabove=1em, linewidth=1.5pt]{fact}
 \surroundwithmdframed[backgroundcolor=yellow!20, skipabove=1em, linewidth=1.5pt]{proposition}
 \surroundwithmdframed[backgroundcolor=green!20, skipabove=1em, linewidth=1.5pt]{lemma}
 \surroundwithmdframed[backgroundcolor=magenta!20, skipabove=1em, linewidth=1.5pt]{notation}
@@ -325,3 +336,10 @@
 \newunicodechar{₊}{\ensuremath{{}_{+}}}
 \newunicodechar{₋}{\ensuremath{{}_{-}}}
 \newunicodechar{₌}{\ensuremath{{}_{=}}}
+
+% itemize
+\newenvironment{itemize*}{
+  \begin{itemize}[topsep=-5pt,itemsep=1pt,partopsep=1pt, parsep=1pt]%
+}{
+  \end{itemize}
+}
