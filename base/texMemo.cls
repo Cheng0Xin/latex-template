@@ -92,6 +92,7 @@
   \newcommand{\sidenotectx}[2]{\marginpar{{\color{black} #2} \small{#1}}}
   \newcommand{\sidenote}[1]{\sidenotectx{#1}{$\blacksquare$}}
   \newcommand{\idxsidenote}[1]{\sidenotectx{\small{{\color{gray} #1}}}{$\hookrightarrow$}}
+  \newcommand{\remph}[1]{\emph{#1}\idxsidenote{#1}}
 \else%
 \usepackage[a4paper,
   inner=20mm,
@@ -99,12 +100,8 @@
   top=20mm,
   bottom=20mm]{geometry} % Page
 \fi%
-  
-% \sidenote{\normalsize{\textbf{{\color{black} $\hookrightarrow$ }}}{\color{gray}#1}}}
-
 
 % Create the Letterhead and To/From Block
-
 \renewcommand{\maketitle}{\makememotitle}
 \newcommand\makememotitle{
 	\ifthenelse{\equal{\@memologo}{\relax}}{}
@@ -130,6 +127,16 @@
 		\ifthenelse{\equal{\@memodate}{\relax}}{}{\item [{Date:}] \@memodate}
 	\end{description}
 	\decorativeline\bigskip{}
+  % For equations
+  \setlength{\abovedisplayskip}{-5pt}
+  \setlength{\abovedisplayshortskip}{-5pt}
+  \setlength{\belowdisplayskip}{-5pt}
+  \setlength{\belowdisplayshortskip}{-5pt}
+
+  % For itemize and enumerate
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\topsep}{-5pt}
 }
 
 % Code
@@ -139,21 +146,21 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \lstdefinestyle{common} {
-  backgroundcolor=\color{backcolour},   
+  backgroundcolor=\color{backcolour},
   commentstyle=\color{codegreen},
   keywordstyle=\color{magenta},
   numberstyle=\tiny\color{codegray},
   stringstyle=\color{codepurple},
   basicstyle=\ttfamily\footnotesize,
-  breakatwhitespace=false,         
-  breaklines=true,                 
-  captionpos=b,                    
-  keepspaces=true,                 
-  numbers=left,                    
-  numbersep=5pt,                  
-  showspaces=false,                
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
   showstringspaces=false,
-  showtabs=false,                  
+  showtabs=false,
   tabsize=2
 }
 
@@ -171,7 +178,7 @@
     Proof, Qed
     },
   sensitive=true,
-  morecomment=[s]{(*}{*)}, 
+  morecomment=[s]{(*}{*)},
   morestring=[b]",
   style=common
 }
@@ -185,7 +192,7 @@
     require, letrec, let, module,
     provide},
   sensitive=true,
-  morecomment=[l]{;}, 
+  morecomment=[l]{;},
   morestring=[b]",
   style=common
 }
@@ -194,15 +201,15 @@
 % Haskell language
 \lstdefinelanguage{haskell} {
   morekeywords={
-    as, case, of, family, default, 
+    as, case, of, family, default,
     module, where, infixl, infix, infixr,
     instance, class, data, deriving,
     do, forall, foreign, hiding, if, then, else,
-    import, let, in, mdo, newtype, proc, qualified, 
+    import, let, in, mdo, newtype, proc, qualified,
     rec, type
     },
   sensitive=true,
-  morecomment=[l]{--}, 
+  morecomment=[l]{--},
   morecomment=[s]{\{-}{-\}},
   morestring=[b]",
   style=common
@@ -265,14 +272,55 @@
 
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
-\newcommand{\remph}[1]{\emph{#1}\idxsidenote{#1}}
-% \renewcommand{\paragraph}[1]{\scalerel*{\WhiteKnightOnWhite}{Xg} \textbf{#1}}
-\renewcommand{\paragraph}[1]{$\blacksquare$ \textbf{#1}}
 \newcommand{\hl}[1]{\textbf{\color{teal}#1}}
-\newcommand{\No}[1]{\hfill\break{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
 \newcommand{\sref}[1]{\textit{$\langle\dag$ #1 $\rangle$}}
+\def\tbf#1{\textbf{#1}}
+\def\tit#1{\textit{#1}}
+\def\ttt#1{\texttt{#1}}
 
+% Numbering
+\renewcommand{\paragraph}[1]{$\blacksquare$ \textbf{#1}}
+\newcommand{\No}[1]{\hfill\break{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
+
+\newcounter{noi}
+\newcounter{noii}
+\newcounter{noiii}
+\def\nocolor{violet}
+
+\newcommand{\noh}{
+  \setcounter{noi}{1}
+  {\color{\nocolor}
+    \textbf{$\blacksquare$\texttt{\arabic{noi}} $\Rightarrow$ }}}
+\newcommand{\no}{
+  \stepcounter{noi}
+  \hfill\break
+  {\color{\nocolor}
+    \textbf{$\blacksquare$\texttt{\arabic{noi}} $\Rightarrow$ }}}
+
+\newcommand{\snoh}{
+  \setcounter{noii}{1}
+  \hfill\break
+  {\color{\nocolor}
+    \textbf{$\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}} $\Rightarrow$ }}}
+\newcommand{\sno}{
+  \stepcounter{noii}
+  \hfill\break
+  {\color{\nocolor}
+    \textbf{$\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}} $\Rightarrow$ }}}
+
+\newcommand{\ssnoh}{
+  \setcounter{noiii}{1}
+  \hfill\break
+  {\color{\nocolor}
+    \textbf{$\vdash\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}.\arabic{noiii}} $\Rightarrow$ }}}
+\newcommand{\ssno}{
+  \stepcounter{noiii}
+  \hfill\break
+  {\color{\nocolor}
+    \textbf{$\vdash\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}.\arabic{noiii}} $\Rightarrow$ }}}
+
+% Font selection
 \iflinux\setCJKmainfont{Noto Sans Mono CJK SC}\fi
 \ifmacosx\setCJKmainfont{Heiti SC}\fi
 
@@ -288,15 +336,16 @@
 \newtheorem{notation}{Notation}
 \newtheorem{convention}{Convention}
 
-\surroundwithmdframed[backgroundcolor=red!20, skipabove=1em, linewidth=1.5pt]{definition}
-\surroundwithmdframed[backgroundcolor=blue!20, skipabove=1em, linewidth=1.5pt]{theorem}
-\surroundwithmdframed[backgroundcolor=blue!20, skipabove=1em, linewidth=1.5pt]{fact}
-\surroundwithmdframed[backgroundcolor=yellow!20, skipabove=1em, linewidth=1.5pt]{proposition}
-\surroundwithmdframed[backgroundcolor=green!20, skipabove=1em, linewidth=1.5pt]{lemma}
-\surroundwithmdframed[backgroundcolor=magenta!20, skipabove=1em, linewidth=1.5pt]{notation}
-\surroundwithmdframed[backgroundcolor=cyan!20, skipabove=1em, linewidth=1.5pt]{convention}
+\mdfdefinestyle{surroundwfstyle}{skipabove=0.5em, linewidth=1.5pt, innertopmargin=10pt}
+\surroundwithmdframed[backgroundcolor=red!20, style=surroundwfstyle]{definition}
+\surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{theorem}
+\surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{fact}
+\surroundwithmdframed[backgroundcolor=yellow!20, style=surroundwfstyle]{proposition}
+\surroundwithmdframed[backgroundcolor=green!20, style=surroundwfstyle]{lemma}
+\surroundwithmdframed[backgroundcolor=magenta!20, style=surroundwfstyle]{notation}
+\surroundwithmdframed[backgroundcolor=cyan!20, style=surroundwfstyle]{convention}
 
-% Note 
+% Note
 \newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
 \newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Conclusion:}}{\end{mdnote}}
 
@@ -336,10 +385,3 @@
 \newunicodechar{₊}{\ensuremath{{}_{+}}}
 \newunicodechar{₋}{\ensuremath{{}_{-}}}
 \newunicodechar{₌}{\ensuremath{{}_{=}}}
-
-% itemize
-\newenvironment{itemize*}{
-  \begin{itemize}[topsep=-5pt,itemsep=1pt,partopsep=1pt, parsep=1pt]%
-}{
-  \end{itemize}
-}
