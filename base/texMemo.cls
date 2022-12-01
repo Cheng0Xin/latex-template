@@ -134,9 +134,9 @@
   % \setlength{\belowdisplayshortskip}{-5pt}
 
   % For itemize and enumerate
-  \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\topsep}{-5pt}
+  \setlength{\itemsep}{0em}
+  \setlength{\parskip}{0em}
+  \setlength{\topsep}{0em}
 }
 
 % Code
@@ -256,7 +256,7 @@
     constexpr, constinit, const_cast, continue,
     co_await, co_return, co_yield, decltype, default,
     delete, do, double, dynamic_cast, else, enum, explicit,
-    export, extern, false, float, for, friend, goto, if,
+    export, extern, false, float, for, friend, goto, if, include,
     inline, int, long, mutable, namespace, new, noexcept,
     not, not_eq, nullptr, operator, or, or_eq, private,
     protected, public, reflexpr, register, reinterpret_cast,
@@ -308,7 +308,7 @@
 \def\ttt#1{\texttt{#1}}
 
 % Numbering
-\renewcommand{\paragraph}[1]{$\blacksquare$ \textbf{#1}}
+\renewcommand{\paragraph}[1]{\hfill\break$\blacksquare$ \textbf{#1}}
 \newcommand{\No}[1]{\hfill\break{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 
 \newcounter{noi}
@@ -364,7 +364,7 @@
 \newtheorem{notation}{Notation}
 \newtheorem{convention}{Convention}
 
-\mdfdefinestyle{surroundwfstyle}{skipabove=0.5em, linewidth=1.5pt, innertopmargin=10pt}
+\mdfdefinestyle{surroundwfstyle}{skipabove=0.5em, linewidth=1.5pt, innertopmargin=6pt}
 \surroundwithmdframed[backgroundcolor=red!20, style=surroundwfstyle]{definition}
 \surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{theorem}
 \surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{fact}
@@ -413,3 +413,8 @@
 \newunicodechar{₊}{\ensuremath{{}_{+}}}
 \newunicodechar{₋}{\ensuremath{{}_{-}}}
 \newunicodechar{₌}{\ensuremath{{}_{=}}}
+
+\renewcommand{\labelenumi}{\ttt{(\arabic{enumi})}}
+\renewcommand{\labelenumii}{\ttt{(\arabic{enumi}.\arabic{enumii})}}
+% \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+% \renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
