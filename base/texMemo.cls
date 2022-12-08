@@ -31,7 +31,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{xeCJK}
 \RequirePackage{parskip}
-\RequirePackage{enumitem}
+% \RequirePackage{enumitem}
 \RequirePackage{pgfgantt}
 \RequirePackage{tikz}
 \RequirePackage{upgreek}
@@ -47,7 +47,6 @@
 \RequirePackage{pifont} % Crossmark and checkmark
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
-
 
 \RequirePackage[backend=biber]{biblatex}
 \ExecuteBibliographyOptions{url=false, maxnames=99}
@@ -137,6 +136,9 @@
   \setlength{\itemsep}{0em}
   \setlength{\parskip}{0em}
   \setlength{\topsep}{0em}
+  % itemize and enumerate sep
+  % \setlist{nosep}
+
 }
 
 % Code
@@ -168,7 +170,6 @@
 \lstdefinelanguage{ocaml} {
   style=common
 }
-\lstnewenvironment{ocaml} {\lstset{language=ocaml}}{}
 
 % Coq language
 \lstdefinelanguage{coq} {
@@ -182,7 +183,6 @@
   morestring=[b]",
   style=common
 }
-\lstnewenvironment{coq} {\lstset{language=coq}}{}
 
 % Racket language
 \lstdefinelanguage{racket} {
@@ -196,7 +196,6 @@
   morestring=[b]",
   style=common
 }
-\lstnewenvironment{racket} {\lstset{language=racket}}{}
 
 % Haskell language
 \lstdefinelanguage{haskell} {
@@ -214,7 +213,6 @@
   morestring=[b]",
   style=common
 }
-\lstnewenvironment{haskell} {\lstset{language=haskell}}{}
 
 % Python
 \lstdefinelanguage{python} {
@@ -227,7 +225,6 @@
   morestring=[b]",
   style=common
 }
-\lstnewenvironment{python} {\lstset{language=python}}{}
 
 % Rust
 \lstdefinelanguage{rust} {
@@ -244,9 +241,8 @@
   morestring=[b]",
   style=common
 }
-\lstnewenvironment{rust} {\lstset{language=rust}}{}
 
-% Rust
+% Cpp
 \lstdefinelanguage{cpp} {
   morekeywords={
     alignas, alignof, and, and_eq, asm, atomic_cancel,
@@ -272,7 +268,6 @@
   morestring=[b]",
   style=common
 }
-\lstnewenvironment{cpp} {\lstset{language=cpp}}{}
 
 % Fsharp
 \lstdefinelanguage{fsharp}{
@@ -296,7 +291,6 @@
   morestring=[b]",
   style=common
 }
-\lstnewenvironment{fsharp} {\lstset{language=fsharp}}{}
 
 % Style
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
@@ -311,6 +305,11 @@
 \renewcommand{\paragraph}[1]{\hfill\break$\blacksquare$ \textbf{#1}}
 \newcommand{\No}[1]{\hfill\break{\color{violet} \textbf{$\textsection$#1$\Rightarrow$}}}
 
+% Control detecting environment
+\newcounter{detectObject}
+\newcommand{\setDetectObject}[1]{\setcounter{detectObject}{#1}}
+\newcommand{\getDetectObject}{\arabic{detectObject}}
+
 \newcounter{noi}
 \newcounter{noii}
 \newcounter{noiii}
@@ -318,33 +317,35 @@
 
 \newcommand{\noh}{
   \setcounter{noi}{1}
+  \setDetectObject{1}
+  \if\getDetectObject1 \setDetectObject{0} \else ~\\ \fi
   {\color{\nocolor}
     \textbf{$\blacksquare$\texttt{\arabic{noi}} $\Rightarrow$ }}}
 \newcommand{\no}{
   \stepcounter{noi}
-  \hfill\break
+  \if\getDetectObject1 \setDetectObject{0} \else ~\\ \fi
   {\color{\nocolor}
     \textbf{$\blacksquare$\texttt{\arabic{noi}} $\Rightarrow$ }}}
 
 \newcommand{\snoh}{
   \setcounter{noii}{1}
-  \hfill\break
+  \if\getDetectObject1 \setDetectObject{0} \else ~\\ \fi
   {\color{\nocolor}
     \textbf{$\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}} $\Rightarrow$ }}}
 \newcommand{\sno}{
   \stepcounter{noii}
-  \hfill\break
+  \if\getDetectObject1 \setDetectObject{0} \else ~\\ \fi
   {\color{\nocolor}
     \textbf{$\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}} $\Rightarrow$ }}}
 
 \newcommand{\ssnoh}{
   \setcounter{noiii}{1}
-  \hfill\break
+  \if\getDetectObject1 \setDetectObject{0} \else ~\\ \fi
   {\color{\nocolor}
     \textbf{$\vdash\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}.\arabic{noiii}} $\Rightarrow$ }}}
 \newcommand{\ssno}{
   \stepcounter{noiii}
-  \hfill\break
+  \if\getDetectObject1 \setDetectObject{0} \else ~\\ \fi
   {\color{\nocolor}
     \textbf{$\vdash\vdash\blacksquare$\texttt{\arabic{noi}.\arabic{noii}.\arabic{noiii}} $\Rightarrow$ }}}
 
@@ -375,7 +376,7 @@
 
 % Note
 \newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
-\newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Conclusion:}}{\end{mdnote}}
+\newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Conclusion: }}{\end{mdnote}\setDetectObject{1}}
 
 % Unicode setting for Agda language
 \RequirePackage{unicode-math}
@@ -418,3 +419,14 @@
 \renewcommand{\labelenumii}{\ttt{(\arabic{enumi}.\arabic{enumii})}}
 % \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 % \renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newenvironment{itemize*}{\begin{itemize}}{\end{itemize}\setDetectObject{1}}
+\newenvironment{enumerate*}{\begin{enumerate}}{\end{enumerate}\setDetectObject{1}}
+\lstnewenvironment{ocaml} {\lstset{language=ocaml}}{}
+\lstnewenvironment{coq} {\lstset{language=coq}}{}
+\lstnewenvironment{racket} {\lstset{language=racket}}{}
+\lstnewenvironment{haskell} {\lstset{language=haskell}}{}
+\lstnewenvironment{python} {\lstset{language=python}}{}
+\lstnewenvironment{rust} {\lstset{language=rust}\setDetectObject{1}}{}
+\lstnewenvironment{cpp} {\lstset{language=cpp}}{}
+\lstnewenvironment{fsharp} {\lstset{language=fsharp}}{}
