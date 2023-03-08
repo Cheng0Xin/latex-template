@@ -48,6 +48,11 @@
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 
+% Formula in section
+\def\secformula#1{\texorpdfstring{$#1$}{}}
+
+\RequirePackage{titlesec}
+
 \RequirePackage[backend=biber]{biblatex}
 \ExecuteBibliographyOptions{url=false, maxnames=99}
 
@@ -100,6 +105,9 @@
   bottom=20mm]{geometry} % Page
 \fi%
 
+% \RequirePackage{bm} % For bold math symbol
+\newcommand{\bm}[1]{\textit{\textbf{#1}}}
+
 % Create the Letterhead and To/From Block
 \renewcommand{\maketitle}{\makememotitle}
 \newcommand\makememotitle{
@@ -127,17 +135,27 @@
 	\end{description}
 	\decorativeline\bigskip{}
   % For equations
-  % \setlength{\abovedisplayskip}{0pt}
+  \setlength{\abovedisplayskip}{0pt}
   % \setlength{\abovedisplayshortskip}{0pt}
-  % \setlength{\belowdisplayskip}{-10pt}
+  \setlength{\belowdisplayskip}{0pt}
   % \setlength{\belowdisplayshortskip}{-5pt}
 
   % For itemize and enumerate
   \setlength{\itemsep}{0em}
   \setlength{\parskip}{0em}
   \setlength{\topsep}{0em}
-  % itemize and enumerate sep
-  % \setlist{nosep}
+
+  % For paragraph
+  \setlength{\baselineskip}{1.2em}
+  % \setlength{\parskip}{\baselineskip}
+
+  % For section
+  \titlespacing\section{0pt}{1\baselineskip}{1\baselineskip}
+  \titlespacing\subsection{0pt}{1\baselineskip}{1\baselineskip}
+  \titlespacing\subsubsection{0pt}{1\baselineskip}{1\baselineskip}
+  \titlespacing\paragraph{0pt}{1\baselineskip}{1\baselineskip}
+
+  % For line space
 
 }
 
@@ -296,10 +314,15 @@
 \renewcommand{\emph}[1]{\textbf{{\color{magenta}#1}}}
 \newcommand{\hl}[1]{\textbf{\color{teal}#1}}
 \newcommand{\chbox}[1]{{\color{brown}#1}}
-\newcommand{\sref}[1]{\textit{$\langle\dag$ #1 $\rangle$}}
+\newcommand{\sref}[1]{
+    \phantomsection
+    \texttt{$\|${\color{codepurple}#1}$\|$}
+    \def\@currentlabel{\unexpanded{#1}}\label{#1}
+}
 \def\tbf#1{\textbf{#1}}
 \def\tit#1{\textit{#1}}
 \def\ttt#1{\texttt{#1}}
+\def\defeq{\overset{\mbox{\ttt{\tiny{def}}}}{=}}
 
 % Numbering
 \renewcommand{\paragraph}[1]{\hfill\break$\blacksquare$ \textbf{#1}}
@@ -353,9 +376,20 @@
 \iflinux\setCJKmainfont{Noto Sans Mono CJK SC}\fi
 \ifmacosx\setCJKmainfont{Heiti SC}\fi
 
-% Theorem & Definition
+% Theorem and Definition
+\newtheoremstyle{theoremdd}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\normalfont}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {. }% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\textnormal{\thmnote{ #3}}}
+
 \RequirePackage[framemethod=TiKz]{mdframed}
-\theoremstyle{definition}
+% \theoremstyle{definition}
+\theoremstyle{theoremdd}
 
 \newtheorem{fact}{Fact}
 \newtheorem{theorem}{Theorem}
@@ -364,19 +398,89 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{notation}{Notation}
 \newtheorem{convention}{Convention}
+\newtheorem*{fact*}{Fact}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{notation*}{Notation}
+\newtheorem*{convention*}{Convention}
 
-\mdfdefinestyle{surroundwfstyle}{skipabove=0.5em, linewidth=1.5pt, innertopmargin=6pt}
+% Short theorem and definition
+\def\thbox#1#2#3{\tbf{{\color{#1}#2}\sref{#3}:}}
+\def\thm#1{\thbox{blue!50}{Theorem}{#1}}
+\def\lmm#1{\thbox{blue!50}{Lemma}{#1}}
+\def\coro#1{\thbox{blue!50}{Corollary}{#1}}
+\def\rmk#1{\thbox{magenta!50}{Remark}{#1}}
+\def\defi#1{\thbox{red!50}{Definition}{#1}}
+\def\conv#1{\thbox{cyan!50}{Convention}{#1}}
+\def\shref#1{\hyperref[#1]{{\color{teal} \ttt{$\dagger$#1}}}}
+\def\impt{\emph{$\star$}}
+
+\mdfdefinestyle{surroundwfstyle}{%
+    roundcorner=5pt,
+    skipabove=0.5em,
+    skipbelow=0.5em,
+    linewidth=1.5pt,
+    innertopmargin=6pt,
+    nobreak=true
+}
 \surroundwithmdframed[backgroundcolor=red!20, style=surroundwfstyle]{definition}
-\surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{theorem}
-\surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{fact}
+\surroundwithmdframed[backgroundcolor=blue!30, style=surroundwfstyle]{theorem}
+\surroundwithmdframed[backgroundcolor=blue!30, style=surroundwfstyle]{fact}
+% \surroundwithmdframed[backgroundcolor=blue!15, style=surroundwfstyle, linewidth=.5pt]{proof}
 \surroundwithmdframed[backgroundcolor=yellow!20, style=surroundwfstyle]{proposition}
-\surroundwithmdframed[backgroundcolor=green!20, style=surroundwfstyle]{lemma}
+\surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{lemma}
 \surroundwithmdframed[backgroundcolor=magenta!20, style=surroundwfstyle]{notation}
 \surroundwithmdframed[backgroundcolor=cyan!20, style=surroundwfstyle]{convention}
+\surroundwithmdframed[backgroundcolor=red!20, style=surroundwfstyle]{definition*}
+\surroundwithmdframed[backgroundcolor=blue!30, style=surroundwfstyle]{theorem*}
+\surroundwithmdframed[backgroundcolor=blue!30, style=surroundwfstyle]{fact*}
+\surroundwithmdframed[backgroundcolor=yellow!20, style=surroundwfstyle]{proposition*}
+\surroundwithmdframed[backgroundcolor=blue!20, style=surroundwfstyle]{lemma*}
+\surroundwithmdframed[backgroundcolor=magenta!20, style=surroundwfstyle]{notation*}
+\surroundwithmdframed[backgroundcolor=cyan!20, style=surroundwfstyle]{convention*}
+
+
+\newenvironment{defienv}[2]{
+    \begin{definition*}[\sref{#1}\tbf{:} #2]\hfill
+}
+{
+    \end{definition*}
+}
+\newenvironment{lmmenv}[2]{
+    \begin{lemma*}[\sref{#1}\tbf{:} #2]\hfill
+}
+{
+    \end{lemma*}
+}
 
 % Note
-\newmdenv[roundcorner=10pt, linecolor=red!50, linewidth=2pt, skipabove=1em, leftmargin=3em, rightmargin=3em, backgroundcolor=yellow!20]{mdnote}
-\newenvironment{note}{\begin{mdnote} \textbf{$\dagger$ Conclusion: }}{\end{mdnote}\setDetectObject{1}}
+\newmdenv[
+    roundcorner=10pt,
+    linecolor=red!50,
+    linewidth=2pt,
+    skipabove=.5em,
+    skipbelow=.5em,
+    nobreak=true,
+    % leftmargin=3em,
+    % rightmargin=3em,
+    backgroundcolor=yellow!20]{mdnote}
+\newenvironment{note}{
+    \begin{mdnote} \textbf{$\dagger$ Conclusion: }}{\end{mdnote}\setDetectObject{1}}
+% Proof
+\newmdenv[
+    roundcorner=5pt,
+    linecolor=black!50,
+    linewidth=1.5pt,
+    skipabove=.5em,
+    skipbelow=.5em,
+    nobreak=true,
+    % leftmargin=3em,
+    % rightmargin=3em,
+    backgroundcolor=blue!10]{mdproof}
+\renewenvironment{proof}{
+    \begin{mdproof} \textbf{Proof: }}{\end{mdproof}\setDetectObject{1}}
 
 % Unicode setting for Agda language
 \RequirePackage{unicode-math}
@@ -422,6 +526,7 @@
 
 \newenvironment{itemize*}{\begin{itemize}}{\end{itemize}\setDetectObject{1}}
 \newenvironment{enumerate*}{\begin{enumerate}}{\end{enumerate}\setDetectObject{1}}
+% \newenvironment{eq*}{\begin{align}}{\end{align}\setDetectObject{1}}
 \lstnewenvironment{ocaml} {\lstset{language=ocaml}}{}
 \lstnewenvironment{coq} {\lstset{language=coq}}{}
 \lstnewenvironment{racket} {\lstset{language=racket}}{}
@@ -430,3 +535,30 @@
 \lstnewenvironment{rust} {\lstset{language=rust}\setDetectObject{1}}{}
 \lstnewenvironment{cpp} {\lstset{language=cpp}}{}
 \lstnewenvironment{fsharp} {\lstset{language=fsharp}}{}
+
+% \newcommand{\restore@Environment}[1]{%
+%   \AtBeginDocument{%
+%     \csletcs{#1*}{#1}%
+%     \csletcs{end#1*}{end#1}%
+%   }%
+%   \setDetectObject{1}
+% }
+% \forcsvlist\restore@Environment{alignat,equation,gather,multline,flalign,align}
+\AtBeginDocument{
+\newenvironment{eq*}{\begin{align}}{\end{align}\setDetectObject{1}}
+}
+\def\[#1\]{~\\\begin{minipage}{\textwidth}\begin{align}#1\end{align}\end{minipage}\setDetectObject{1}\\}
+
+\def\refstable#1{
+\begin{table}[H]
+    \resizebox{\columnwidth}{!}{
+    \begin{tabular}{| l | l | l |}
+	\hline
+	#1
+	\hline
+    \end{tabular}}
+\end{table}
+}
+\def\refsitem#1#2#3{
+    #1 & \shref{#2} & #3 \\
+}
