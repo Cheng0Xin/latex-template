@@ -53,7 +53,7 @@
 
 \RequirePackage{titlesec}
 
-\RequirePackage[backend=biber]{biblatex}
+\RequirePackage[backend=biber, sorting=none]{biblatex}
 \ExecuteBibliographyOptions{url=false, maxnames=99}
 
 \def\@btitle{\relax}
@@ -453,6 +453,12 @@
 }
 {
     \end{lemma*}
+}
+\newenvironment{thmenv}[2]{
+    \begin{theorem*}[\sref{#1}\tbf{:} #2]\hfill
+}
+{
+    \end{theorem*}
 }
 
 % Note
